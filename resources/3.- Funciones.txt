@@ -1,0 +1,83 @@
+que es un funcion
+
+una funcion es una forma de escribir codigo reutilizable, puede servir para otros proyectos o para reducir la complejidad de mi codigo
+
+una funcion debe y solo debe realizar una funcion en concreto
+
+asignarle un nombre de acuerdo a su funcion
+
+las funciones deben ser cargadas antes de ser utlizadas, invocadas despues de su definicion
+
+si un parametro es opcional todos deben ser opcionales
+
+def nombre(parameter1="valor optional", parameter2="valor optional"):
+
+	global var - para manipular una variable global localmente dentro de la funcion
+			variable shadowing
+
+	var = asignacion - se utiliza dentro de una funcion
+	                   una vez realizada la funcion la variable se destruye
+
+	instructions
+
+nombre()
+nombre(x, y)
+nombre(parameter2=9) - nombre del parametro igual al valor del parametro
+
+numero de parametros variables
+------------------------------
+
+def nombre(*args): -> args se convierte en una tupla
+
+	for arg in args:
+		instructions
+
+	instruction
+	
+nombre(1, 2, 3, 4, 5)	
+	
+numero de parametros con nombre
+-------------------------------
+
+def nombre(**kwargs): -> args se convierte en un diccionario
+
+	kwargs['hoy'] if 'hoy' in kwargs else 0 operadores ternarios
+
+	for key, value in kwargs.items():
+		instructions
+
+	instruction
+	
+nombre(parameter="hoy")
+
+devolucion de valores
+---------------------
+
+def suma(a, b):
+	return a + b
+	
+resultado = suma(2, 4)
+print(resultado)
+
+def operaciones(a, b):
+	return a + b, a - b, a * b, a / b
+	
+resultado = suma(2, 4)
+print(resultado) - regresa una tupla
+
+suma, resta, multi, divi = suma(2, 4)
+print(suma)
+print(resta)
+print(multi)
+print(divi)
+
+suma, resta, multi, _ = suma(2, 4) -> _ ignora el valor devuelto para ese valor
+
+funciones anonimas, lambda
+--------------------------
+
+Syntax
+lambda arguments : expression
+
+anonima = lambda nombre, nombre2 : print("hola")
+anonima("pepe", "hola")

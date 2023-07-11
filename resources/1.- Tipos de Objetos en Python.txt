@@ -240,5 +240,6 @@ bit
 
 import math
 help(math)
+dir(math)
 
 https://docs.python.org/3/library/math.html

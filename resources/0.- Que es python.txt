@@ -46,7 +46,7 @@ automatizar tareas, ansible, saltstack
 script de gestión
 GUI (binding) - pygtk (gtk) , pyqt (qt), wxpython, tkinter (tcl/tk)
 sistemas de backend - django, flask 
-base de datos - psycopg mysql, pygresql, mysql conector python, mariadb python conector, pymongo mongodb, pysqlite3
+base de datos - psycopg2 postgresql, pygresql postgresql, mysql conector python (oracle), mariadb python conector, pymongo mongodb, pysqlite3
 calculo cientifico, numpy (funciones matematicas complejas), scipy (algoritmos de datos)
 data analisis (datos tabulares) - pandas
 

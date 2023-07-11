@@ -1,0 +1,282 @@
+que es python?
+--------------
+
+lenguaje de programación interpretado (scripting)
+
+cython - lenguaje C
+jython - lenguaje java
+
+python --version
+
+pre-release -> stable release
+
+python3 -> abre interprete de python, donde puedo ejecutar comandos
+
+interprete -> no se ejecuta directamente en mi procesador, el interprete ejecuta mi codigo paso a paso, contras velocidad de ejecucion, ventajas facil de depurar, se ejecuten en una mayor variedad de maquinas donde el interprete este instalado
+
+salir del interprete
+
+exit()
+quit()
+CTRL + D
+
+lista de python instalados
+
+ls -1 -l /usr/bin/python*
+
+python soporta:
+
+programación procedural
+orientado a objetos (OOP) -> Object Oriented Programming (OOP)
+herencia y herencia multiple
+
+tipado -> tipo de datos (dinamico y fuerte)
+	dinamicamente -> determinado automaticamente por el interrete (python)
+	estaticamente -> C/C++, java el compilador no adivina el tipo de dato
+	fuerte -> trabajar solo con mismos tipos de datos
+	debil -> trabajar con diferentes tipo de datos
+	
+type(variable) - imprimir el tipo de dato de una variable
+
+variable -> forma de darle un nombre humano a un valor
+
+usos de python: 
+
+automatizar tareas, ansible, saltstack
+script de gestión
+GUI (binding) - pygtk (gtk) , pyqt (qt), wxpython, tkinter (tcl/tk)
+sistemas de backend - django, flask 
+base de datos - psycopg mysql, pygresql, mysql conector python, mariadb python conector, pymongo mongodb, pysqlite3
+calculo cientifico, numpy (funciones matematicas complejas), scipy (algoritmos de datos)
+data analisis (datos tabulares) - pandas
+
+El intérprete de Python
+-----------------------
+
+que es un interprete -> un programa que coje otro programa (script) y las ejecuta secuencialmente, no se puede ejecutar nativamente en el ordenador
+
+ls  -l /usr/bin/pyhton*
+python --version
+python3 --version
+
+pip - instalar librerias/paquetes/modulos a nivel de sistemas, tantas como instalaciones de python tenga en mi ordenador
+
+pip [commands]
+	install -U [paquete] 
+	uninstall [paquete]
+	search (pypi.org web page) desabilitado por problemas de seguridad
+	list - todos los paquetes instalados
+	show [paquete] - informacion detallada
+	
+import numpy
+help(numpy)  - ayuda, print(numpy.lookfor) - documentacion por modulo
+dir(numpy) - ver todos los modulos
+
+Fichero requiremets.txt - utilizado por pip modulos necesita mi programa
+-----------------------
+
+flask==0.12.1
+
+pip install -r requirements.txt
+
+flask>=1.0.0
+
+pip install -r requirements.txt
+
+no se pueden tener las dos versiones instaladas
+
+Virtual_env (entorno virtual para instalar modulos) independientes entre ellos y el sistema
+-----------
+
+misma version de python y pip
+
+malo
+
+virtualenv [nombre entorno virtual]
+source [carpeta]/[nombre entorno virtual]/bin/activate - activar el modo virtual
+source demo1/venv/bin/activate - activar el modo virtual
+deactivate
+
+bueno
+
+mkdir virtualenvs (unico directorio de virtual environments)
+virtualenv scipy
+virtualenv mates
+virtualenv [entorno]
+
+ls /scipy/bin/activate
+source virtualenvs/scipy/bin/activate
+pip list
+deactivate
+
+ls /mates/bin/activate
+source virtualenvs/mates/bin/activate
+pip list
+deactivate
+
+peor (no funciona en windows)
+
+pip install pipenv
+pyenv install --list
+pyenv install pypy-2.3.1
+pyenv versions
+pyenv global system
+which pyhton
+
+pipenv shell - crear entorno
+deactivate
+pipenv shell - entrar en el entorno
+pipenv install numpy - en esta carpeta
+cat Pipfile - lista de todos los paquetes
+pipenv install flask==0.12.1
+cat Pipfile
+pipenv uninstall flask
+cat Pipfile
+
+exit - salir/desactivar del entorno
+
+instalar una libreria desde un repositorio github con pipenv
+
+pipenv install -e git+https://github.com/request/request.git#egg-requests
+
+Pipfile.lock = equivalent to requirements.txt 
+
+pipenv lock - generar el pipfile.lock
+
+copiar el pipfile.lock en el nuevo directorio
+
+pipenv install --ignore-pipfile , crea el entorno/projectyo leyando las dependencias desde el pipfile.lock, y reproducir todo el entorno
+
+pipenv graph - ver las dependencias
+
+pipenv uninstall [libreria]
+
+pipenv check - para ver si es segura o fallos conocidos
+
+flujo de trabajo con pipenv
+---------------------------
+
+mkdir demo5
+pipenv shell - crear
+trabajar
+exit
+pipenv shell - entrar
+pip install pandas
+pip list
+exit
+
+otros tipos
+-----------
+
+python3-virtualenvwrapper -> https://virtualenvwrapper.readthedocs.io/en/latest/command_ref.html
+
+poetry
+------
+
+https://python-poetry.org/docs/
+
+Project setup
+-------------
+
+poetry new poetry-demo
+
+The pyproject.toml file is what is the most important here. This will orchestrate your project and its dependencies. 
+
+Initialising a pre-existing project
+-----------------------------------
+
+cd pre-existing-project
+poetry init
+
+Specifying dependencies
+-----------------------
+
+if you want to add dependencies to your project, you can specify them in the tool.poetry.dependencies section.
+
+[tool.poetry.dependencies]
+pendulum = "^2.1"
+
+- https://python-poetry.org/docs/dependency-specification/
+- https://python-poetry.org/docs/dependency-specification/#multiple-constraints-dependencies
+
+poetry add pendulum
+
+Using poetry run
+----------------
+
+To run your script simply use poetry run python your_script.py. Likewise if you have command line tools such as pytest or black you can run them using poetry run pytest.
+
+Activating the virtual environment
+----------------------------------
+
+The easiest way to activate the virtual environment is to create a nested shell with poetry shell.
+
+To deactivate the virtual environment and exit this new shell type exit. To deactivate the virtual environment without leaving the shell use deactivate.
+
+If you’d like to prevent poetry shell from modifying your shell prompt on virtual environment activation, you should set VIRTUAL_ENV_DISABLE_PROMPT=1 as an environment variable before running the command.
+
+Alternatively, to avoid creating a new shell, you can manually activate the virtual environment by running source {path_to_venv}/bin/activate ({path_to_venv}\Scripts\activate.ps1 in PowerShell). To get the path to your virtual environment run poetry env info --path. You can also combine these into a one-liner, such as source $(poetry env info --path)/bin/activate (& ((poetry env info --path) + "\Scripts\activate.ps1") in Powershell).
+
+To deactivate this virtual environment simply use deactivate.
+
+
+POSIX SHELL								EXIT/DEACTIVATE
+Sub-shell		poetry shell					exit
+Manual Activation	source {path_to_venv}/bin/activate		deactivate
+One-liner		source $(poetry env info --path)/bin/activate	deactivate
+
+Installing dependencies
+-----------------------
+
+poetry install
+
+Installing without poetry.lock
+------------------------------
+
+If you have never run the command before and there is also no poetry.lock file present, Poetry simply resolves all dependencies listed in your pyproject.toml file and downloads the latest version of their files.
+
+When Poetry has finished installing, it writes all the packages and their exact versions that it downloaded to the poetry.lock file, locking the project to those specific versions. You should commit the poetry.lock file to your project repo so that all people working on the project are locked to the same versions of dependencies (more below).
+
+Installing with poetry.lock
+---------------------------
+
+This brings us to the second scenario. If there is already a poetry.lock file as well as a pyproject.toml file when you run poetry install, it means either you ran the install command before, or someone else on the project ran the install command and committed the poetry.lock file to the project (which is good).
+
+Either way, running install when a poetry.lock file is present resolves and installs all dependencies that you listed in pyproject.toml, but Poetry uses the exact versions listed in poetry.lock to ensure that the package versions are consistent for everyone working on your project. As a result you will have all dependencies requested by your pyproject.toml file, but they may not all be at the very latest available versions (some dependencies listed in the poetry.lock file may have released newer versions since the file was created). This is by design, it ensures that your project does not break because of unexpected changes in dependencies.
+
+Updating dependencies to their latest versions
+----------------------------------------------
+
+As mentioned above, the poetry.lock file prevents you from automatically getting the latest versions of your dependencies. To update to the latest versions, use the update command. This will fetch the latest matching versions (according to your pyproject.toml file) and update the lock file with the new versions. (This is equivalent to deleting the poetry.lock file and running install again.)
+
+Managing environments
+---------------------
+
+Switching between environments
+------------------------------
+
+poetry env use /full/path/to/python
+
+Displaying the environment information
+--------------------------------------
+
+poetry env info
+poetry env info --path
+poetry env info --executable
+
+Listing the environments associated with the project
+----------------------------------------------------
+
+poetry env list
+poetry env list --full-path
+
+Deleting the environments
+-------------------------
+
+poetry env remove /full/path/to/python
+poetry env remove python3.7
+poetry env remove 3.7
+poetry env remove test-O3eWbxRl-py3.7
+
+poetry env remove python3.6 python3.7 python3.8
+poetry env remove --all

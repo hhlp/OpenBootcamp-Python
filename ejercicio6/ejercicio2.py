@@ -13,9 +13,11 @@ class Alumno():
         else:
             print(f"{self.nombre} ha aprobado")
 
-alumno1 = Alumno("Alumno 1", 4)
-alumno1.mostrar()
-alumno1.valorar()
-alumno2 = Alumno("Alumno 2", 7)
-alumno2.mostrar()
-alumno2.valorar()
+if __name__ == "__main__":
+
+    alumno1 = Alumno("Alumno 1", 4)
+    alumno1.mostrar()
+    alumno1.valorar()
+    alumno2 = Alumno("Alumno 2", 7)
+    alumno2.mostrar()
+    alumno2.valorar()

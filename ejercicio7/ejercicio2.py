@@ -10,5 +10,5 @@ hs = datetime.datetime.strptime(salida, '%H:%M:%S')
 if ha >= hs:
     print("Es Hora de Salir")
 else:
-    faltante = hs - ha
-    print("Faltan :", faltante, "para la salida")
+    Faltante = hs - ha
+    print("Faltan :", Faltante, "para la salida")

@@ -1,0 +1,232 @@
+¿Qué es un objeto?
+
+una representacion de algo del mundo real y tienen metodos que son acciones que realizan
+
+class Dino:
+
+	_encendido = True
+
+	def enciende(self):
+		self._encendido = True
+
+	def apaga(self):
+		self._encendido = False	
+		
+	def isEncendido(self):
+		return self._encendido
+
+
+d = Dino() - crea una instanciando de la clase, contiene todos los metodos de la clase dino
+		creando una zona de memoria para cada instancia y cada instancia es diferente
+print(d.enciende())
+d.encendido = False
+print(d.enciendido()) - acceso de la variable dentro de la clase
+d.apaga()
+print(d._encendido)
+print(d.isEncendido())
+
+class Estatica:
+
+	numero = 1
+	
+	def incrementa():
+		Estatica.numero+=1
+		
+Estatica.incremenet()
+print(Eststica.numero)
+
+las clases estaticas comparten un mismo espacio de memoria
+las clase dinamicas se instancias y reserva una zona de memoria independiente para cada clase
+las clases en python son diccionarios
+
+Herencia
+--------
+
+relaciones HIS-A
+
+una clase herencia las propiedades los metodos de otro propiedad
+la herencia multiple y se pone de menor a mayor
+
+class Juguete:
+
+	_encendido = True
+
+	def enciende(self):
+		self._encendido = True
+
+	def apaga(self):
+		self._encendido = False	
+		
+	def isEncendido(self):
+		return self._encendido
+
+class Potato(Juguete):
+
+	def quitarOreja(self):
+		pass
+		
+	def ponerOreja(self):
+		pass	
+
+class Dino(Potato, Juguete):
+
+	color = None
+	nomre = None
+
+	def __init__(self, nombre): - constructor para tener una clase en un estado
+					predeterminado
+		self.color = "verde"
+		self.nombre = nombre
+		print("Estoy en el constructor")
+
+	def __del__(self); - se ejecuta en el momento que no hay mas referencias a la clase
+		print(estoy en el destructor de la clase", self.__clase__)
+
+	def verEscamas(self):
+		pass
+		
+p = Potato()
+p.enciende()
+print(p.isEncendido())
+p.apaga()
+print(p.isEncendido())
+
+p = Dino()
+p.enciende()
+print(p.isEncendido())
+p.apaga()
+print(p.isEncendido())
+
+prit(dir(p)) - ver los parametros para la clase
+
+p = Dino("victor") 
+print(p.color)
+del(p) - ejecuto el destructor en cualquier sitio que se quiera
+print(p.nombre)
+
+class Juguete:
+
+	_encendido = True
+
+	def __init__(self):
+		print("estoy en la clase juguete, en su constructor")
+
+	def enciende(self):
+		self._encendido = True
+
+	def apaga(self):
+		self._encendido = False	
+		
+	def isEncendido(self):
+		return self._encendido
+
+class Dino(Juguete):
+
+	color = None
+	nombre = None
+
+	def __init__(self, nombre):
+		1. forma la mejor
+		super().__init__(nombre) - invocar el constructor de la clase mayor
+		2. forma
+		Juguete.__init__(self, nombre)
+		print("Estoy en el constructor de la clase Dino()")
+
+	def verEscamas(self):
+		pass
+
+p =Dino("nombre")
+
+Clase abstractas
+----------------
+
+no podemos instanciar una clase abstracta
+sirve para definir un conjunto de funciones comunes a otras clases
+contiene implementacion parciales
+
+from abc impmport ABC, abstractmethod
+
+class Animal(ABC):
+	
+	@abstractmethod - cualquier clase que derive debe implementar este methodo
+	def sonido(self):
+		pass
+
+	def diHola(self):
+		print("hola")
+
+class Perro(Animal);
+
+	def sonido(self);
+	print("Guau")
+	
+class Gato(Animal);
+
+	def sonido(self);
+	print("Miau")	
+	
+
+a = Perro()
+p.sonido()
+p.diHola()
+
+a = Gato()
+p.sonido()
+p.diHola()
+
+Relaciones HAS-A
+----------------
+
+contiene
+
+composicion, que una clase esta compuesta de otras clases
+jerarquia de objetos sin utilizar herencia
+
+class Motor:
+	tipo = "diesel"
+
+class Ventanas:
+	cantidad = 5
+	
+	def cambiarCantidad(self, valor);
+		self.cantidad = valor
+	
+class Ruedas:
+	cantidad = 4
+
+class Carroceria:
+	ventana = Ventanas()
+	ruedas = Ruedas()
+	
+class Coche:
+	motor = Motor()
+	carroceria = Carroceria()
+
+c = Coche()
+print("Motor es", c.motor.tipo)
+print("ventanas", c.carrocerias.ventanas.cantidad)
+
+c.carroceria.ventanas.cambiarCantidad(3)
+print("ventanas", c.carrocerias.ventanas.cantidad)
+
+-------------------------------------------
+
+class Categorias:
+	idcategoria = 0
+	nombre = ""
+	
+class Proveedores:
+	idproveedor = 0
+	nombre = ""
+
+class Productos:
+	idproducto = 0
+	CategoriaProducto = Categorias()
+	Precio = 0
+	Tamaño = 0
+	TipoDeProdcuto = =
+	CIFProveedor = Proveedores()
+	
+p = Productos()
+p.CIFProveedor.nombre
+p.CategoriaProducto.idcategoria

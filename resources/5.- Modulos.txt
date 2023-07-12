@@ -1,0 +1,191 @@
+¿Qué es un módulo?
+
+archivo que contiene una serie de sentencias y definiciones
+
+¿Para qué sirven los módulos?
+
+para mantener los cambios de una ejecucion a otra
+
+se llaman igual que el fichero subyacente y con extension .py
+
+tener el codigo mucho mas limpio
+
+los modulos estaran cmopuesto por:
+1. funciones
+2. clase
+3. variables
+
+los modulos se agrupan dentro de paquetes
+paquetes es una coleccion de modulos y paquetes, es un directorio pero cno un fichero especial
+
+Creando un modulo
+-----------------
+
+suma.py
+
+def suma(x, y):
+	return x+y
+	
+print(suma(2,2))
+
+Ejecutar un modulo
+------------------
+
+python suma.py
+
+¿Cómo saber el nombre de los módulos?
+-------------------------------------
+
+print(__name__) -> salida __main__ -> ejecutando desde la linea de comandos y utilizar el
+					modulo como un programa idenpendiente
+
+main.py
+-------
+
+import operaciones as ope
+       |--> modulo    |--> nombre dentro del programa
+       
+import math -> metemáticas
+import sys -> systema
+
+sys.path.append("/Users/hhlp/mismodulos") -> para que busque los modulos aqui	
+
+import pprint -> mostar de forma bonita los diccionarios y las listas
+
+import saluda -> modulo fuera de la ruta modificada con sys.path.append
+
+def main():
+
+	# funcion
+	
+	print(ope.como_me_llamo()) -> salida operaciones
+	
+	# funcion
+	
+	res = ope.suma(2, 2)
+	print("Hola en main()", res)
+	
+	# clase
+	
+	op = operaciones.Operador()
+	print(op.multiplicacion(4,2))
+	
+	# variables
+	
+	print(op.PI)
+	
+	pprint.pprint(sys.path) -> los modulos que importan desde python se buscan aqui 
+					devuelve una (lista)
+		
+	# modulo fuera del path		
+		
+	saluda.saluda("hhlp")					
+					
+# codigo global
+
+if __name__ == "__main__":
+	main()
+	
+operaciones.py
+--------------
+
+PI = 3.1416 
+
+suma(a, b):
+	return a+b
+
+resta(a, b):
+	return a-b
+	
+def como_me_llamo():
+	return __name__
+	
+class Operador:
+	def multiplicacion(self, a ,b):
+		return a * b
+		
+saluda.py
+---------
+
+def saluda(nombre):
+	print("Hola", nombre)
+	
+Paquetes
+--------
+
+crear directorio operaciones
+
+from operaciones import suma
+import operaciones.suma
+
+# from operaciones import *
+
+def main():
+
+	operaciones.suma.suma(2,2) -> primero paquete, despues modulo y ultimo funcion
+	
+	mp = operaciones.suma.Multiplicador()
+	print(mp.multiplica(5,5))
+	
+# codigo global
+
+if __name__ == "__main__":
+	main()	
+	
+dentro de operaciones un fichero suma.py y el archivo __init__.py (vacio)
+-------------------------------------------------------------------------
+
+dentro de este archivo __init__.py
+
+__all__ = ['suma'] -> aunque alguien haga import * solo se importa la funcion suma
+
+suma.py
+-------
+
+def suma(a, b):
+	"""
+		documentacion de la funcion
+	"""
+	return a + b
+
+class Multiplicador:
+	"""
+		documentacion de la funcion
+	"""
+	def multiplica(self, a , b):
+		return a * b
+		
+Paquetes
+--------
+
+pypi.org -> python package index, find for date last update or las mas trending topic
+
+ssh python
+mongodb python
+
+que funciones tiene este modulo
+
+dir(modulo)
+help(obj.suma)
+
+ambitos
+-------
+
+el alcance de una funcion o de una variable en el constesto de nuestro programa
+
+funciones
+. globals -> devuelve la tabla de simbolos en diccionarios de tiempo de ejecucion del programa
+		permite cambiar el comportamiento del programa
+		ejecutar funciones
+		no muestran los de ambito local
+. locals -> devuelve la tabla de simbolos en diccionario de tiempo real pero en el ambito de
+		funcion
+
+import pprint
+
+pprint.pprint(globals())
+pprint.pprint(locals())
+
+globals()['variable'] = 6
+globals()['h'].patata() -> dinamica
+globals()['hola'].patata() -> statica

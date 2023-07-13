@@ -1,0 +1,234 @@
+mostrar variables dentro de una cadena
+
+numero = 5
+texto = "quijote"
+otromas = 1.2
+
+antigua
+-------
+
+print("El numero es %d y el texto es %s y tiene %f' % (numero, texto, otromas))
+print("Valor flotante: %.2f" % otromas)
+
+hasta la 3.6
+------------
+
+print("El numero es {0} y el texto es {1} y tiene {2}'
+	.format(numero, texto, otromas)
+)
+
+print("El numero es {n1} y el texto es {texto} y tiene {otromas}'
+	.format(n1=numero, texto=texto, otromas=otromas)
+)
+
+nueva f-string
+--------------
+
+print(f"El numero es {numero} y el texto es {texto} y tiene {otromas}')
+
+def suma(a, b):
+	return a + b 
+
+print(f"El numero es {suma(numero, numero)} y el texto es {texto.upper()} y tiene {otromas}')
+
+representaciones textuales de una clase
+---------------------------------------
+
+str - convierte cosas a cadenas, informales
+repr() - convierte cosas a texto, tecnicas desarrollo o depuracion
+
+ambas representan a un objeto
+
+class Jugete:
+	nombre = ""
+	precio = 0.0
+	
+	def __init__(self, nombre, precio):
+		self.nombre = nombre
+		self.precio = precio
+		
+	def __str__(self):
+		return f"Mi nombre es {self.nombre} y mi precio {self.precio}"
+
+	def __repr__(self): -> represententation
+		return f"potato({self.nombre}, {self.precio})"	
+
+j1 = Juguete("potato", 10.5)
+print(str(j1)) -> sobrecarga
+
+si no tenemos str pero tenemos repr, se ejecutara repr
+si tenemos str pero no tenemos repr, e invocamos repr se ejecutara el comportamiento por defecto, no se convertira a ninguna representacion
+
+metodos de las cadenas de texto
+-------------------------------
+
+help(str)
+dir(str)
+
+cadena = "en un lugar de la manchA")
+
+capitalize, primera letra en mayuscula
+title, primera letra mayuscula
+count(letra), cuantas veces aparece una letra
+lower, todo a minuscula
+upper, todo a mayuscula
+format, para dar formato
+isdigit, si es numero
+isalnum, si el alfanumerico
+isalpha, si el alfabetico si todos los caracteres son alfabeticos
+strip, elimina espacios
+lstrip, quita espacio a la izquierda
+rsrtip, quita espacio a la derecha
+split("en"), para ficheros de texto, convierte cadena a lista
+starwith("en"), si comienza con
+endswith("mancha") si termina con
+
+Manipulación de ficheros
+------------------------
+
+modo de lectura
+
+a = append al final del mismo
+r = read 
+w = write crear desde cero
+x = create
+
+t texto
+b binary
+
++ reading and writing
+
+leer completo
+-------------
+
+f = open('/etc/passswd', 'r')
+datos = f.read() - lee todo
+datos = f.read(18) - \n leer una parte 
+f.close()
+
+print(datos) 
+
+leer linea a linea
+------------------
+
+datos = ""
+
+while len(datos) > 0:
+	datos = f.readline()
+
+f.close()
+
+print(datos)
+
+leer todo el fichero en una lista
+---------------------------------
+
+datos = []
+f = open('/etc/passswd', 'r')
+datos = f.readlines()
+f.close()
+
+print(datos) - se ve el barra \n
+
+programa
+--------
+
+def main()
+
+	usuarios = listarUsuarios()
+	print(usuarios)
+	
+def listarUsuarios():
+	
+	f = open('/etc/passswd', 'r')
+	datos = f.readlines()
+	f.close()
+	
+	resultado = []
+	
+	for linea in datos:
+	
+		if linea[0] == '#':
+			continue
+			
+		if linea [0] == '_':
+			continue
+			
+		partes = linea.split(':')
+		resultado.append(partes[0])
+		
+	return resultado	
+
+if __name__ = '__main__':
+	main()
+	
+escribir un fichero
+-------------------
+
+f = open('mifichero.txt', 'a') - escribir al final del archivo
+f = open('mifichero.txt', 'w') - machacar
+f.write("datos\n")
+f.write("datos2\n")
+f.close
+
+lista = [
+	'una linea\n',
+	'dos lineas\n'
+]
+
+f = open('mifichero.txt', 'w') - machacar
+f.writelines(lista)
+f.close
+
+programa
+--------
+
+def escribe(fichero, datos)
+
+	f = open(fichero, 'w')
+	
+	for linea in datos:
+	
+		if not linea.endswith('\n'):
+			linea = linea + '\n'
+	
+		f.write(linea)
+	
+	f.close
+	
+lista = [
+	'una linea',
+	'dos lineas'
+]	
+	
+escribe('mifichero.txt', lista)
+
+serializar y descealizar datos
+------------------------------
+
+consiste en que yo convierto un objeto a una secuencia de datos en disco
+
+import pickle
+
+class Jugete:
+	nombre = ""
+	precio = 0.0
+	
+	def __init__(self, nombre, precio):
+		self.nombre = nombre
+		self.precio = precio
+		
+	def getNombre(self):
+		return self.nombre
+		
+j1 = Juguete("potato", 10.5)
+f = open('datos.bin','wb')
+pickle.dump(j1, f)
+f.close
+print(j1.getNombre())
+
+f = open('datos.bin','rb')
+potato = pickle.load(f)
+f.close
+print(potato) - objeto
+print(potato.getnombre(), potato.precio)

@@ -232,3 +232,21 @@ potato = pickle.load(f)
 f.close
 print(potato) - objeto
 print(potato.getnombre(), potato.precio)
+
+* Use readline in a loop since it will only read one line at a time.
+
+while True:
+    line = f.readline()
+    if not line: break
+    keyword = line.rstrip()
+    buscaLocal(keyword)
+
+
+* Use readlines to read in all the lines in the file at once into a list of strings:
+
+for line in f.readlines():
+    keyword = line.rstrip()
+    buscaLocal(keyword)
+    
+* writelines expects an iterable of strings
+* write expects a single string.    

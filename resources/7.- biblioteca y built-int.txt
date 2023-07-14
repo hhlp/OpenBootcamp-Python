@@ -1,0 +1,151 @@
+built-in funciones que trae el propio lenguaje a nivel de interprete
+
+https://docs.python.org/3/library/index.html
+
+multihilo - multiple funciones en paralelo
+---------
+
+import _thread
+import time
+
+def horaActual(nombre_thread, tiempo_de_espera):
+
+	count = 0
+
+	while count = 5
+		count += 1
+		time.sleep(tiempo_de_Espera
+		print(f"hilo: {nombre_thread"} - {time.ctime(time.time())}")
+
+_thread.start_new_thread(horaActual("thread_uno", 1)) - dispara la funciones
+_thread.start_new_thread(horaActual("thread_dos", 2)) - continua y sigue con el programa
+
+logging - generar ficheros de registro
+-------
+
+import logging
+
+logging.basicConfig(level=loggin.INFO) - info, warning, error, critical, debug
+
+logging.info("Arrancando programa") 
+logging.info("arrancando programa")
+logging.warning("hace calor")
+
+built-in
+--------
+
+map
+---
+
+aplica una funcion a todos los elementos iterables (lista y tuplas)
+
+resultaod = map(FUNCION; LISTA]
+
+
+def cuadrado(x):
+	return x * x
+	
+map([1, 2, 3, 4, 5, 6, 7, 8, 9])	
+map(lambda x: x * x, [1, 2, 3, 4, 5, 6, 7, 8, 9])
+
+filter
+------
+
+numeros = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+
+aplica una funcion a todos los elementos de una lista, extrae todos los valores de esa lista, que debe devolver True or False
+
+def mifuncion(x):
+	if x %2 == 0:
+		return True
+	return False		
+		
+filter(FUNCION, lista)
+
+filter(lambda x: x % 2 == 0, numeros)
+filter(mifuncion, numeros)
+
+reduce
+------
+
+from functools import reduce
+
+ejecutar de forma recursiva sobre la lista hasta que la lista se quede con un unico elemento
+necesitan dos parametros
+
+reduce(funcion, lista)
+
+def suma(a, b):
+	return a + b
+	
+reduce(suma, [1, 2, 3, 4, 5])	
+reduce(lambda a, b: a + b, [1, 2, 3, 4, 5])
+
+zip
+---
+
+agrega iterables y los devuelve
+
+cursos = ["java", "python", "git"]
+aistentes = [15, 20, 4]
+
+zip(cursos, asistentes)
+
+all() any()
+-----------
+
+para verificar que todas las condiciones de una lista se cumplan o para verificar que algunas condiciones de la lista se cumplan
+
+listaA = [ 1==1, 2==3, 3 == 4]
+any(listaA) - una de esta a sido cierta
+all(ListaA) - todas sean ciertas
+
+round
+-----
+
+a = 5.5
+round(a)
+
+redondear al valor mas proximo
+
+min
+---
+
+min(2, 3, 4, 5, 6,)
+
+pow
+---
+
+elevar
+
+pow(2, 4) = 2 ** 4
+
+sorted
+------
+
+ordenada
+
+lista = ['z', 'c', 'd']
+sorted(lista, reverse=True, key=lambda x: xtr(x).startwith('d'))
+
+input
+-----
+
+entrada de datos
+
+from getpass import getpass
+
+user = input("username: ")
+passwd = getpass("password: ")
+
+int
+---
+
+convertir string a entero, cuando se realiza input el valor es str
+
+int(valor)
+
+range
+-----
+
+range(start, stop, step=1)

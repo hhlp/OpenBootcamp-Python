@@ -1,0 +1,189 @@
+interface grafica de usuario es una aplicacion que nos muestra de forma visual una interfaz que nos periite iteractuar con un programa nativo o con otro programas
+
+pygtk
+pyqt
+wxpython - wxwidget
+tkinter
+Tkinter Designer
+
+componentes o widget son controles
+
+dentro de una ventana puedo posicionar objetos
+diferentes tipos de posicionamiento de objetos/widget (geometria): 
+	pack, cuando queremos situar elementows de arriba o abajo, izq o derecha
+	grid, rejilla o matrix  
+	places, posicionar de forma absoluta o relativo dentro de otra ventana
+
+pack
+----
+
+import tkinter
+
+window = tkinter.Tk()
+dir(window)
+help(window)
+
+label_saludo = tkinter.label(window, text="hola!", bg="ellow", fg="blue")
+label_saludo.pack(ipadx=50, ipady=50, fill="both") 
+
+expand=True 
+side="left" posicionamiento a la izquierda
+
+label_adios = tkinter.label(window, text="Adios", bg="red", fg="white")
+label_adios.pack(ipadx=50, ipady=100, fill="both")
+
+window.mainloop() - mostrar la pantalla
+
+grid
+----
+
+import tkinter
+from tkinter import ttk
+
+window = tkinter.Tk()
+
+# 0,0 1,0 2,0
+# 0,1 1,1 2,1
+# 0,2 1,2 2,2
+
+window.columconfigure(0, weight=1)
+window.columconfigure(0, weight=3)
+
+username_label = ttk.label(window, text="Username:")
+username_label(grid(column=0, row=0, sticky=tkinter.W, padx=5, pady=5) # W = west
+
+username_entry = ttk.Entry(window)
+user_name_entry.grid(column=1, row=0, sticky.E, padx=5, pady=5)
+
+password_label = ttk.label(window, text="Password:")
+password_label(grid(column=0, row=1, sticky=tkinter.W, padx=5, pady=5) # W = west
+
+password_entry = ttk.Entry(window, show="*")
+password_entry.grid(column=1, row=1, sticky.E, padx=5, pady=5)
+
+login_button = ttk.Buttom(window, text="login")
+login_button.grid(column=1, row=3, sticky.E, padx=5, pady=5)
+
+window.mainloop() - mostrar la pantalla
+
+place
+-----
+
+import tkinter
+from tkinter import ttk
+import random
+
+window = tkinter.Tk()
+
+colors = ['blue', 'red', 'yellow', 'purple', 'green', 'black']
+
+for x in range(0,10):
+	color = random.randint(0, len(colors)-1)
+	color2 =random.randint(0, len(colors)-1)
+	label = tkinter.label(window, text="etiqueta!", bg=colors[color2], fg=colors[color])
+	label.place(x=random.randint(0,100), y=random.randint(0,100))
+
+window.mainloop() - mostrar la pantalla
+
+widget/componentes
+------------------
+
+import tkinter
+from tkinter import ttk
+
+window = tkinter.Tk()
+
+# 0,0 1,0 2,0
+# 0,1 1,1 2,1
+# 0,2 1,2 2,2
+
+window.columconfigure(0, weight=1)
+window.columconfigure(0, weight=3)
+
+username_label = ttk.label(window, text="Username:")
+username_label(grid(column=0, row=0, sticky=tkinter.W, padx=5, pady=5) # W = west
+
+username_entry = ttk.Entry(window)
+user_name_entry.grid(column=1, row=0, sticky.E, padx=5, pady=5)
+
+password_label = ttk.label(window, text="Password:")
+password_label(grid(column=0, row=1, sticky=tkinter.W, padx=5, pady=5) # W = west
+
+password_entry = ttk.Entry(window, show="*")
+password_entry.grid(column=1, row=1, sticky.E, padx=5, pady=5)
+
+login_button = ttk.Buttom(window, text="login")
+login_button.grid(column=1, row=3, sticky.E, padx=5, pady=5)
+
+window.mainloop() - mostrar la pantalla
+
+widget
+------
+
+frames contenedores, sub-ventanas
+----------------------------------
+
+frame = ttk.Frame 
+label = ttk.label(frame, text="hola")
+label.grid(colum=0, row=0, stiky=tkinter.W, padx=50, pady=50) 
+
+frame.grid(colum=0, row=0, stiky=tkinter.W)
+
+listbox, lista de selecciones
+------------------------------
+
+lista = ["windows", "macos", "linux", "msdos"]
+lista_items = StringVar(value=Lista)
+listbox =tkinter.Listbox(window, height=100, listvariable=lista_items)
+listbox.grid(colum=0, row=0, sticky=tkinter.W)
+
+radio buttom
+------------
+
+selected = tkinter.StingVar()
+r1 = ttk.Radiobutton(window, text="si", value="1", variable=selected)
+r1.grid(column=0, row=1, padx=5, pady=5)
+
+check
+-----
+
+def funcion():
+	print("clicado")
+
+selected = tkinter.StingVar()
+checkbox = ttk.Checkbutton(window, text="Acepto", variable=selected, command=mifuncion)
+checkbox.grid(row=0, colum=0)
+
+eventos
+-------
+
+evento cuando yo hago algo en mi ventana
+
+def salir(event):
+	print("salir")
+	window.quit()
+
+def saludar(event);
+	print("han echo click en saludar")
+	
+def saludarDoubleClick(event);
+	print("han echo Doble click en saludar")	
+
+boton = tkinter.Button(window, text="haz click")
+boton.pack()
+
+boton.bind("<Button-1>", saludar)
+boton.bind("<Double-1>", saludarDoubleClick)
+boton.bind("<Button-1>", salir)
+
+tipos de ventana
+----------------
+
+window = tkinter.Tk()
+filename = filedialog.askopenfilename()
+window.mainloop()
+
+window = tkinter.Tk()
+filename = colorchosser.askocolor(initialcolor="#ff0000")
+window.mainloop()
+

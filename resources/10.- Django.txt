@@ -1,0 +1,183 @@
+django es un framework un conjunto de herramienta comandos y codigo que no permite desarrollar sitios web
+
+dango tiene el modelo mtv
+	modelo  
+	template 
+	vista
+
+projecto - esta compuesto por varias aplicaciones
+aplicaciones - cada projecto esta dividido en aplicaciones
+
+crear un projecto django
+------------------------
+
+django admin startproject [nombre projecto] .
+
+pỳthon manage.py runserver
+
+crear aplicaciones
+------------------
+
+python manage.py startup catalog
+
+conetar miprojecto general con mi aplicacion
+--------------------------------------------
+
+settings.py en miprojecto
+
+busco installed_Apps y añado
+
+catalog.apps.CatalogConfig
+
+urls.py en miprojecto
+
+busco urlpatterns y añado
+
+from django.urls import include
+
+path('catalog/', include('catalog.urls'))
+
+dentro de catalog crear un arhcivo urls.py
+
+from django.conf import url
+from . import views
+
+urlpatterns = []
+
+preparar nuestra base de datos
+------------------------------
+
+python manage.py makemigrations
+python manage.py migrate
+
+crear un superusuario
+---------------------
+
+python manage.py createsuperuser
+
+crear modelos
+-------------
+
+representacion de datos de nuestra aplicacion
+
+carpeta aplicacion - models.py
+
+from djano.urls import reverse
+import uuid
+
+class Genre(models.Model):
+	name = models.CharField(max_length=64, help_text="Pon el nombre del genero")
+	
+	def __str__(self):
+		return self.name
+
+class Book(models.Model):
+	title = models.CharField(max_length=32)
+	author = models.ForeignKey("Author", on_delete=models.SET_MULL, null=True)
+	summary = models.TextField(max_length=100, help_text="de que va el lbro")
+	isbn = models.Charfield("ISBN", max_length=13, help_text= "ISBN de 13 car") 
+	genre = models.ManyToManyField(Genre)
+
+	def __str__(self):
+		return self.title
+
+	def get_absolute_url(self):
+		return reverse('book-detail, args=[str(self.id)])
+
+class BookInstance(models.Model):
+	id = models.UUIDField(primary_key=Treu, default=uuid.uuid4, help_text="ID unico")
+	book = model.ForeignKey('Book', on_delete=modesl.SET_NULL, null=True)
+	imprint = models.CharField(max_length=200)
+	due_back = models.DateField(null=True, blank=True)
+	
+	LOAN_STATUS = (
+		('m', 'Maintanace'),
+		('o', 'On loan'),
+		('a', 'Available'),
+		('r', 'Reserved'),
+	)	
+		
+	status = models.CharField(max_length=1, choices=LOAN_STATUS, balnk=True, default='m', help_text="Dsiponibilidad del libro")
+
+	class Meta:
+		
+		ordering = ["due_back"]
+		
+	def __str__(self):
+		return "%s (%s)" % (self.id,self.book.title)
+		
+class Author(models.Model):
+	first_name = models.CahrField(,ax_length=100)
+	last_name = models.CahrField(,ax_length=100)
+	date_of_birth = models.DateField(null=True, blank=True)
+
+	def get_absolute_url(self):
+		return reverse('author-detail, args=[str(self.id)])
+
+	def __str__(self):
+		return "%s, %s" % (self.last_name,self.first_name)
+
+python manage.py makemigrations
+python manage.py migrate
+
+permitir que el panel de administracion de django nos permita administrar nuestros modelos
+-------------------------------------------------------------------------
+
+dentro de mi aplicacion archivo admin.py
+
+from .models import Author, Genre, Book, BookInstance
+
+registar mis modelos en el panel de administracion
+
+admin.site.register(Author)
+admin.site.register(Genre)
+admin.site.register(Book)
+admin.site.register(BookInstance)
+
+python manage.py makemigrations
+python manage.py migrate
+
+view
+----
+
+urls.py dentro de mi catalogo
+
+import django.conf.urls import url
+from . import views
+
+urlpatterns = [
+	url(r'^$', view.index, name='index')
+]
+
+views.py dentro de catalog
+
+from .models import Boo, Author, BookInstance, Genre
+
+def index(request):
+	num_books = Book.objects.all().count()
+	num_instance = BookInstance.object.all().count()
+	num_authors = Author.objects.all().count()
+	
+	disponibles = BookInstance.objects.filer(status_exact = 'a').count()
+	
+	return render(
+		request,
+		'index.html',
+		context={
+			'num_books': num_books,
+			'num_instance': num_instance,
+			'num_authors': num_authors,
+			'disponibles': disponibles
+		}
+	)
+	
+crear una carpeta dentro de catalog
+-----------------------------------
+
+mkdir templates
+
+basic_generic.html
+index.html
+
+mkdir static
+	mkdir css
